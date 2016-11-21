@@ -13,22 +13,22 @@
 </head>
 <body>
 
-	<h1>입력 페이지</h1>
-	<form action="add.do" method="POST">
+	<h1>${title } 페이지</h1>
+	<form method="POST">
 	<p>
 		<table for="sabun">sabun</table>
-		<input type="text" name="sabun" id="sabun"/>
+		<input type="text" name="sabun" id="sabun" value="${dto.sabun }"/>
 	</p>	
 	<p>
 		<table for="name">name</table>
-		<input type="text" name="name" id="name"/>
+		<input type="text" name="name" id="name" value="${dto.name }"/>
 	</p>	
 	<p>
 		<table for="pay">pay</table>
-		<input type="text" name="pay" id="pay"/>
+		<input type="text" name="pay" id="pay" value="${dto.pay }"/>
 	</p>	
 	<p>
-		<button type="submit">입 력</button>
+		<button type="submit">${title }</button>
 		<button type="reset">취 소</button>
 	</p>
 	</form>

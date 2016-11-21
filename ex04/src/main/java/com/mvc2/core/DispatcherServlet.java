@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.mvc2.controller.DetailImp;
+import com.mvc2.controller.DeteleImp;
 import com.mvc2.controller.IndexImp;
 import com.mvc2.controller.InsertOneImp;
 import com.mvc2.controller.InterController;
 import com.mvc2.controller.ListImp;
+import com.mvc2.controller.UpdateImp;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -47,6 +49,10 @@ public class DispatcherServlet extends HttpServlet {
 			ic= new InsertOneImp();
 		}else if (path.equals("/detail.do")){
 			ic= new DetailImp();
+		}else if (path.equals("/update.do")){
+			ic= new UpdateImp();
+		}else if (path.equals("/delete.do")){
+			ic= new DeteleImp();
 		}
 		String url=ic.execute(request,response);
 		String prefix="/WEB-INF/page/";

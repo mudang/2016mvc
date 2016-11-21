@@ -13,7 +13,9 @@ public class InsertOneImp implements InterController {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		//GET방싱의 경우 입력폼페이지로
-		if(req.getMethod().equals("GET"))return "guest/add";
+		if(req.getMethod().equals("GET")){
+			req.setAttribute("title", "입력");
+			return "guest/add";}
 		//POST방식의 경우 DB에 값입력후 결과
 		GuestDao dao = new GuestDao();
 		String[] params= new String[3];
