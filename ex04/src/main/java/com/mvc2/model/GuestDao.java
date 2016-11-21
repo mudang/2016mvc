@@ -10,112 +10,42 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.mvc2.core.RowMapper;
 import com.mvc2.core.SqlTemplate;
 
 public class GuestDao {
 	private Logger logger = Logger.getLogger(this.getClass());
-	private static final String driver ="oracle.jdbc.OracleDriver";
-	private static final String url ="jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String user ="scott";
-	private static final String password ="tiger";
-	private Connection conn;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
 	
 	public GuestDao(){
-		try {
-			Class.forName(driver);
-			conn=DriverManager.getConnection(url, user, password);
-		}catch (ClassNotFoundException e) {
-			logger.error("driver 확인");
-		}catch (SQLException e) {
-			logger.error(e.getMessage());
+	}
+	class InnerCl implements RowMapper{
+
+		@Override
+		public List rowMapper(ResultSet rs) throws SQLException {
+			List<GuestVo> list = new ArrayList<GuestVo>();
+			while(rs.next()){
+				list.add(new GuestVo(rs.getInt("sabun")
+						,rs.getString("name")
+						,rs.getDate("nalja")
+						,rs.getInt("pay")));
+			}		
+			return list;
 		}
+		
 	}
-	public void setConn(Connection conn) {
-		this.conn = conn;
-	}
-	
 	
 	
 	public List<GuestVo> selectAll() {
 		String sql = "select * from guest";
-		List<GuestVo> list = new ArrayList<GuestVo>();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				list.add(new GuestVo(rs.getInt("sabun"),rs.getString("name")
-						,rs.getDate("nalja"),rs.getInt("pay")));
-			}
-		} catch (SQLException e) {
-			logger.error("selectAll메소드 에러");
-		}finally{
-			try {
-				if(rs!=null)rs.close();
-				if(pstmt!=null)pstmt.close();
-				if(conn!=null)conn.close();
-			} catch (Exception e) {
-				logger.error("close()오류");
-			}
+		return new SqlTemplate().executeList(sql,new InnerCl());			
 		}
-		
-		
-		
-		return list;
-	}
-
 	
-
 	public GuestVo selectOne(int sabun) {
 		String sql= "select * from guest where sabun=?";
-		List<GuestVo> list= new ArrayList<GuestVo>();
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, sabun);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				return new GuestVo(rs.getInt("sabun")
-						,rs.getString("name")
-						,rs.getDate("nalja")
-						,rs.getInt("pay"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				if(rs!=null)rs.close();
-				if(pstmt!=null)pstmt.close();
-				if(conn!=null)conn.close();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		}
-		
-		return null;
+		Object[] obj={sabun};
+		return (GuestVo)(new SqlTemplate().executeOne(sql,obj,new InnerCl()));
 	}
-	
-//	public void executeUpdate(String sql,GuestVo vo){
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, vo.getSabun());
-//			pstmt.setString(2, vo.getName());
-//			pstmt.setInt(3, vo.getPay());
-//			pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally{
-//			try {
-//				if(pstmt!=null)pstmt.close();
-//				if(conn.getAutoCommit()==false)conn.rollback();
-//				if(conn!=null)conn.close();
-//			} catch (Exception e2) {
-//				e2.printStackTrace();
-//			}	
-//			
-//	}
-//	}
-
+		
 	public void insertOne(GuestVo vo) {
 		
 		new SqlTemplate().executeUpdate("INSERT INTO GUEST VALUES(?,?,SYSDATE,?)"
