@@ -15,7 +15,7 @@
 	<h1>main page</h1>
 	
 	<p><a href="list.do">list page</a></p>
-	
+	<img src="/ex04/img/aaa.jpg"/>
 	
 </body>
 </html>

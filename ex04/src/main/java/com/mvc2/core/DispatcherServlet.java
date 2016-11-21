@@ -53,6 +53,10 @@ public class DispatcherServlet extends HttpServlet {
 			ic= new UpdateImp();
 		}else if (path.equals("/delete.do")){
 			ic= new DeteleImp();
+		}else{
+			//¿¹¿Ü /img/aaa.jpg
+			
+			return;
 		}
 		String url=ic.execute(request,response);
 		String prefix="/WEB-INF/page/";
