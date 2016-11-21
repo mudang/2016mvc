@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -13,23 +12,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>리스트 페이지</h1>
-	<table>
-	<tr>
-	<th>사번</th>
-	<th>이름</th>
-	<th>날짜</th>
-	<th>금액</th>
-	</tr>
-	<c:forEach items="${alist }" var="bean">
-		<tr>
-		<td>${bean.sabun}</td>
-		<td><a href="detail.do?idx=${bean.sabun}">${bean.name }</a></td>
-		<td>${bean.nalja }</td>
-		<td>${bean.pay }</td>
-		</tr>
-	</c:forEach>
-	</table>
-	<p><a href="./add.do">입 력 </a></p>
+
+	<h1>입력 페이지</h1>
+	<form action="add.do" method="POST">
+	<p>
+		<table for="sabun">sabun</table>
+		<input type="text" name="sabun" id="sabun"/>
+	</p>	
+	<p>
+		<table for="name">name</table>
+		<input type="text" name="name" id="name"/>
+	</p>	
+	<p>
+		<table for="pay">pay</table>
+		<input type="text" name="pay" id="pay"/>
+	</p>	
+	<p>
+		<button type="submit">입 력</button>
+		<button type="reset">취 소</button>
+	</p>
+	</form>
 </body>
 </html>
