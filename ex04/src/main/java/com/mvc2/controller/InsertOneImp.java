@@ -32,7 +32,9 @@ public class InsertOneImp implements InterController {
 		int pay= Integer.parseInt(params[2]);
 		GuestVo vo = new GuestVo(sabun,name,null,pay);
 		dao.insertOne(vo);
-		return "guest/result";
+		
+//		return "guest/result";
+		return "./list.do";
 	}
 
 }

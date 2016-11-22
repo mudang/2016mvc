@@ -58,11 +58,21 @@ public class DispatcherServlet extends HttpServlet {
 			
 			return;
 		}
-		String url=ic.execute(request,response);
 		String prefix="/WEB-INF/page/";
 		String suffix=".jsp";
+		String url=ic.execute(request,response);
+		if(url.endsWith(".do")){
+			System.out.println("리다이렉트 원함");
+			
+//			response.sendRedirect(url);
+//			return;
+		}else{
+			url=prefix+url+suffix;
+		}
 		
-		request.getRequestDispatcher(prefix+url+suffix).forward(request, response);
+		
+//		request.getRequestDispatcher(prefix+url+suffix).forward(request, response);
+		request.getRequestDispatcher(url).forward(request, response);
 		
 	}
 
