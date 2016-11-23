@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+	<struts>
+		<package name="ex04" namespace="/ex04" extends="ex05">
+    		<action name="test41" class="com.struts.tutorial.action04.Action01">
+     			<result type="redirectAction">
+     				<param name="id">admin</param>
+     				<param name="pw">1234</param>
+     				<param name="actionName">test22</param>
+     			</result>
+     		</action>	
+     	</package>
+	</struts>

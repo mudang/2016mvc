@@ -53,8 +53,8 @@ public class GuestVo {
 
 	@Override
 	public String toString() {
-		return "GuestVo [sabun=" + sabun + ", name=" + name + ", nalja="
-				+ nalja + ", pay=" + pay + "]";
+		return  "{\"sabun\":\"" + sabun + "\", \"name\":\"" + name + "\", \"nalja\":\""
+	            + nalja + "\", \"pay\":\"" + pay + "\"}";
 	}
 	
 }

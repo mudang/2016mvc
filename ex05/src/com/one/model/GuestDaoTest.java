@@ -17,5 +17,20 @@ public class GuestDaoTest {
 			System.out.println(bean);
 		}
 	}
-
+	@Test
+	public void testSelectOne(){
+		int sabun = 1111;
+		GuestDao dao = new GuestDao();
+		GuestVo bean = dao.selectOne(sabun);
+		assertNotNull(bean);
+		System.out.println(bean);
+	}
+	@Test
+	public void testDeleteOne(){
+		int sabun = 4444;
+		GuestDao dao = new GuestDao();
+		GuestVo bean = dao.selectOne(sabun);
+		assertNotNull(bean);
+		System.out.println(bean);
+	}
 }
